@@ -22,12 +22,12 @@ class MovieTableSeeder extends Seeder
             $newMovie->title = $movie["title"];
             $newMovie->description = $movie["description"];
             $newMovie->thumb = $movie["thumb"];
-            $newMovie->price = $movie["price"];
+            $newMovie->price = str_replace('$', '', $movie["price"]);
             $newMovie->series = $movie["series"];
             $newMovie->sale_date = $movie["sale_date"];
             $newMovie->type = $movie["type"];
-            $newMovie->artists = $movie["artists"];
-            $newMovie->writers = $movie["writers"];
+            $newMovie->artists = implode(", ", $movie["artists"]);
+            $newMovie->writers = implode(", ", $movie["writers"]);
             $newMovie->save();
         }
     }
