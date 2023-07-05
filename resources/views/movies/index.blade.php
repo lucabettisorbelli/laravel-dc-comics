@@ -10,12 +10,15 @@
 </head>
 <body>
     <h1 class="text-center">Movies-Dc-Comics</h1>
+    <div class="text-center">
+        <a class="btn btn-primary" href="{{ route("movies.create") }}">Aggiungi un nuovo Film</a>
+    </div>
     
-    <div class="container">
+    <div class="container mt-1">
         <div class="card text-center">
-            <ul>
+            <ul class="list-group">
                 @foreach ($movies as $movie)
-                    <li><a href="{{ route("movies.show", $movie->id) }}">{{$movie->title}}</a></li>
+                    <li class="list-group-item"><a href="{{ route("movies.show", $movie->id) }}">{{$movie->title}}</a></li>
                 @endforeach
             </ul>
         </div>
