@@ -71,21 +71,34 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Movie $movie)
     {
-        //
+        return view("movies.edit", compact("movie"));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Movie $movie)
     {
-        //
+
+        $data = $request->all();
+
+        $movie->title = $data['title'];
+        $movie->description = $data['description'];
+        $movie->price = $data['price'];
+        $movie->series = $data['series'];
+        $movie->type = $data['type'];
+        $movie->artists = $data['artists'];
+        $movie->writers = $data['writers'];
+        $movie->thumb = $data['image'];
+        $movie->update();
+
+        return redirect()->route('movies.show', $movie->id);
     }
 
     /**
