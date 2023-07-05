@@ -7,6 +7,17 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <title>dettaglio film</title>
 </head>
+<style>
+    .boxImage{
+        width: 250px;
+        height: 250px;
+    }
+
+    .boxImage img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
 <body>
     <div class="title text-center">
         <h1>Dettaglio film</h1>
