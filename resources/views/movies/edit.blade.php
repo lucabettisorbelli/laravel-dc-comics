@@ -15,6 +15,7 @@
             <div class="col">
                 <form action="{{ route('movies.update'), $movie->id }}" method="post">
                     @csrf
+                    
 
                     @method("PUT")
                 
