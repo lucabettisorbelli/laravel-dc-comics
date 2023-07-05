@@ -23,6 +23,11 @@
         <h1>Dettaglio film</h1>
         <h4><a class="btn btn-primary" href="{{route("home")}}">Torna alla home</a></h4>
         <h4><a class="btn btn-primary" href="{{ route("movies.edit", $movie) }}">Modifica questo film</a></h4>
+        <form action="{{ route('movies.destroy', $movie) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <input class="btn btn-danger" type="submit" value="Cancella il film">
+        </form>
     </div>
     <div class="container">
         <div class="row">
