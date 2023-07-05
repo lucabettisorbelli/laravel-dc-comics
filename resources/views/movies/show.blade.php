@@ -21,7 +21,8 @@
 <body>
     <div class="title text-center">
         <h1>Dettaglio film</h1>
-        <h4><a href="{{route("home")}}">Torna alla home</a></h4>
+        <h4><a class="btn btn-primary" href="{{route("home")}}">Torna alla home</a></h4>
+        <h4><a class="btn btn-primary" href="{{ route("movies.edit", $movie) }}">Modifica questo film</a></h4>
     </div>
     <div class="container">
         <div class="row">

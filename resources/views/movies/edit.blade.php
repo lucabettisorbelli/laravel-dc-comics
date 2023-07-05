@@ -13,7 +13,7 @@
         <h4><a href="{{route("home")}}">Torna alla home</a></h4>
         <div class="row g-4 py-4">
             <div class="col">
-                <form action="{{ route('movies.update'), $movie->id }}" method="post">
+                <form action="{{ route('movies.update', $movie->id) }}" method="post">
                     @csrf
                     
 
