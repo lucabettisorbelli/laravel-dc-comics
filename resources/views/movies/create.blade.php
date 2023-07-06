@@ -13,6 +13,15 @@
         <h4><a href="{{route("home")}}">Torna alla home</a></h4>
         <div class="row g-4 py-4">
             <div class="col">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('movies.store') }}" method="post">
                     @csrf
                 

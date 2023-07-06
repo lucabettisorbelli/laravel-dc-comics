@@ -22,7 +22,7 @@ class MovieTableSeeder extends Seeder
             $newMovie->title = $movie["title"];
             $newMovie->description = $movie["description"];
             $newMovie->thumb = $movie["thumb"];
-            $newMovie->price = str_replace('$', '€', $movie["price"]);
+            $newMovie->price = str_replace('$', '', $movie["price"]);
             $newMovie->series = $movie["series"];
             $newMovie->sale_date = $movie["sale_date"];
             $newMovie->type = $movie["type"];
