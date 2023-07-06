@@ -41,7 +41,8 @@ class MovieController extends Controller
         $request->validate([
             "title" => "required|min:5|max:50",
             "description" => "required|min:5|max:50",
-            "type" => "required|min:5|max:50"
+            "type" => "required|min:5|max:50",
+            "price" => 'required|numeric|between:0,99.99'
         ]);
 
 
