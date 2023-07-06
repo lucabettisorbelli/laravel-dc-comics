@@ -22,11 +22,14 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('movies.store') }}" method="post">
+                <form action="{{ route('movies.store') }}" method="post" class="needs-validation">
                     @csrf
                 
                     <label for="name">title</label>
-                    <input class="form-control" type="text" name="title">
+                    <input class="form-control @error('title') is-invalid" @enderror type="text" name="title">
+                    @error("title")
+                    <div class="invalid-feedback">Hai sbagliato il titolo</div>
+                    @enderror
     
                     <label for="name">description</label>
                     <input class="form-control" type="text" name="description">
