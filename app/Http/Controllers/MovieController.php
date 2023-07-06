@@ -6,6 +6,8 @@ use App\Models\Movie;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Validator;
+
 class MovieController extends Controller
 {
     /**
@@ -29,6 +31,27 @@ class MovieController extends Controller
         return view("movies.create");
     }
 
+
+    private function validateMovie($data)
+    {
+        $validator = Validator::make($data, [
+            "title" => "required|min:5|max:50",
+            "description" => "min:5|max:65535",
+            "thumb" => "required|max:20",
+            "price" => "max:255",
+            "series" => "min:5|max:255",
+            "sale_date" => "required|max:20",
+            "type" => "required|max:20",
+            "artists" => "required|max:20",
+            "writers" => "required|max:20",
+        ], [
+            "title.required" => "Il titolo è obbligatorio",
+            "title.min" => "Il titolo deve essere almeno di :min caratteri"
+        ])->validate();
+
+        return $validator;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,13 +61,14 @@ class MovieController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            "title" => "required|min:5|max:50",
-            "description" => "required|min:5|max:50",
-            "type" => "required|min:5|max:50",
-            "price" => 'required|numeric|between:0,99.99'
-        ]);
+        // $request->validate([
+        //     "title" => "required|min:5|max:50",
+        //     "description" => "required|min:5|max:50",
+        //     "type" => "required|min:5|max:50",
+        //     "price" => 'required|numeric|between:0,99.99'
+        // ]);
 
+        $data = $this->validateMovie($request->all());
 
         $data = $request->all();
 
@@ -58,6 +82,7 @@ class MovieController extends Controller
         $newMovie->writers = $data['writers'];
         $newMovie->thumb = $data['image'];
         $newMovie->save();
+
 
         return redirect()->route('movies.show', $newMovie->id);
     }
