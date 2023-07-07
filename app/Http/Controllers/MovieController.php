@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
 
+use App\Http\Requests\StoreMovieRequest;
+
 class MovieController extends Controller
 {
     /**
@@ -32,25 +34,25 @@ class MovieController extends Controller
     }
 
 
-    private function validateMovie($data)
-    {
-        $validator = Validator::make($data, [
-            "title" => "required|min:5|max:50",
-            "description" => "min:5|max:65535",
-            "thumb" => "required|max:20",
-            "price" => "max:255",
-            "series" => "min:5|max:255",
-            "sale_date" => "required|max:20",
-            "type" => "required|max:20",
-            "artists" => "required|max:20",
-            "writers" => "required|max:20",
-        ], [
-            "title.required" => "Il titolo è obbligatorio",
-            "title.min" => "Il titolo deve essere almeno di :min caratteri"
-        ])->validate();
+    // private function validateMovie($data)
+    // {
+    //     $validator = Validator::make($data, [
+    //         "title" => "required|min:5|max:50",
+    //         "description" => "required|min:5|max:65535",
+    //         "image" => "required",
+    //         "price" => "max:255",
+    //         "series" => "min:5|max:255",
+    //         "type" => "required|max:20",
+    //         "artists" => "required|max:20",
+    //         "writers" => "required|max:20",
+    //     ], [
+    //         "title.required" => "Il titolo è obbligatorio",
+    //         "title.min" => "Il titolo deve essere almeno di :min caratteri",
+    //         "description.required" => "la descrizione è obbligatoria"
+    //     ])->validate();
 
-        return $validator;
-    }
+    //     return $validator;
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -58,7 +60,7 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMovieRequest $request)
     {
 
         // $request->validate([
@@ -68,19 +70,11 @@ class MovieController extends Controller
         //     "price" => 'required|numeric|between:0,99.99'
         // ]);
 
-        $data = $this->validateMovie($request->all());
-
-        $data = $request->all();
+        $data = $request->validated();
 
         $newMovie = new Movie;
-        $newMovie->title = $data['title'];
-        $newMovie->description = $data['description'];
-        $newMovie->price = $data['price'];
-        $newMovie->series = $data['series'];
-        $newMovie->type = $data['type'];
-        $newMovie->artists = $data['artists'];
-        $newMovie->writers = $data['writers'];
-        $newMovie->thumb = $data['image'];
+        $newMovie->fill($data);
+
         $newMovie->save();
 
 

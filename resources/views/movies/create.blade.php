@@ -26,22 +26,19 @@
                     @csrf
                     
                     <label for="name">title</label>
-                    <input class="form-control @error('title') is-invalid" @enderror type="text" name="title">
-                    @error("title")
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
+                    <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" value="{{ old('title') }}">
+                        @error('title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
     
                     <label for="name">description</label>
-                    <input class="form-control @error('title') is-invalid" @enderror type="text" name="description">
-                    @error("description")
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
+                    <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" value="{{ old('description') }}">
+                        @error('description')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
     
                     <label for="name">price</label>
-                    <input class="form-control @error('price') is-invalid" @enderror type="text" name="price">
-                    @error("price")
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
+                    <input class="form-control" type="text" name="price">
     
                     <label for="name">image</label>
                     <input class="form-control" type="text" name="image">
@@ -50,10 +47,7 @@
                     <input class="form-control" type="text" name="series">
     
                     <label for="name">type</label>
-                    <input class="form-control @error('type') is-invalid" @enderror type="text" name="type">
-                    @error("type")
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
+                    <input class="form-control" type="text" name="type">
     
                     <label for="name">artists</label>
                     <input class="form-control" type="text" name="artists">
