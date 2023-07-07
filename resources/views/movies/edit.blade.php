@@ -20,7 +20,10 @@
                     @method("PUT")
                 
                     <label for="name">title</label>
-                    <input class="form-control" type="text" name="title" value="{{$movie->title}}">
+                    <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" value="{{ old('title') }}">
+                        @error('title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
     
                     <label for="name">description</label>
                     <textarea class="form-control" name="description" cols="30" rows="7">{{$movie->description}}</textarea>

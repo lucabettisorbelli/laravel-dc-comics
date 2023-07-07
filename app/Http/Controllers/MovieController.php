@@ -6,7 +6,7 @@ use App\Models\Movie;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UpdateMovieRequest;
 
 use App\Http\Requests\StoreMovieRequest;
 
@@ -111,22 +111,17 @@ class MovieController extends Controller
      * @param  Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movie $movie)
+    public function update(UpdateMovieRequest $request, Movie $movie)
     {
 
-        $data = $request->all();
+        $data = $request->validated();
 
-        $movie->title = $data['title'];
-        $movie->description = $data['description'];
-        $movie->price = $data['price'];
-        $movie->series = $data['series'];
-        $movie->type = $data['type'];
-        $movie->artists = $data['artists'];
-        $movie->writers = $data['writers'];
-        $movie->thumb = $data['image'];
-        $movie->update();
+        $newMovie = new Movie;
+        $newMovie->fill($data);
 
-        return redirect()->route('movies.show', $movie->id);
+        $newMovie->save();
+
+        return to_route('movies.show', $movie->id);
     }
 
     /**
